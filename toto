@@ -1,0 +1,32 @@
+{
+    "proprietaire": {
+        "nom": "Diallo",
+        "prenom": "Bassirou"
+    },
+    "films": [
+        [
+            {
+                "titre": "Pulp fiction",
+                "annee": 1994,
+                "realisateur": {
+                    "nom": "Tanrantino",
+                    "prenom": "Quentin"
+                },
+                "acteurs": [
+                    {
+                        "nom": "Travolta",
+                        "prenom": "John"
+                    },
+                    {
+                        "nom": "Thurman",
+                        "prenom": "Uma"
+                    },
+                    {
+                        "nom": "Jackson",
+                        "prenom": "Samuel L."
+                    }
+                ]
+            }
+        ]
+    ]
+}

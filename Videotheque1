@@ -1,0 +1,6 @@
+[{"proprietaire": {"nom": "Diallo", "prenom": "Bassirou"}}, {"films": []}]
+
+
+
+https://stackoverflow.com/questions/55591341/write-json-into-file-python-3
+https://pythonexamples.org/run.php?pgm=import+json%0A%0AmyList+%3D+%5B%7B%27a%27%3A+54%7D%2C+%7B%27b%27%3A+41%2C+%27c%27%3A87%7D%5D%0AjsonString+%3D+json.dumps%28myList%2C+indent%3D4%29%0Aprint%28jsonString%29
