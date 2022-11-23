@@ -38,19 +38,36 @@ def add_data(filename):
         print(data['films'])
     
     listFilms=data['films']
-    fims = {
-        "titre" : "Pulp fiction" ,
+    films = {
+        "titre" : "Fast and furious" ,
         "annee" : 1994 ,
         "realisateur" : {"nom" : "Tanrantino" , "prenom" : "Quentin" } ,
         "acteurs" : [
-            {"nom" : "Travolta" , "prenom" : "John" },
+            {"nom" : "Chadwick" , "prenom" : "Boseman" },
             {"nom" : "Thurman" , "prenom" : "Uma" },
             {"nom" : "Jackson" , "prenom" : "Samuel L." }
         ]
     },
-    listFilms.append(fims)
+    print(type(listFilms))
+    print(type(films))
+    listFilms+=films
 
     with open(f'{filename}', 'w') as f:
-        json.dump(data,f, indent=4)
+        json.dump(data, f, indent=4)
         
     return "<p>Films added!</p>"
+
+
+
+
+@app.route("/api/foundMovie/<filename>/<mouvie>")
+def found_data(filename, mouvie):
+    with open(f'{filename}', 'r') as f:
+        data=json.load(f)
+        print('-------------------------------------------')
+        for i in data['films']:
+            if i['titre'] == mouvie:
+                print(data['films'][0])
+                return "<p>Movie founded!</p>"
+            else:
+                return "<p>Movie not founded!</p>"
