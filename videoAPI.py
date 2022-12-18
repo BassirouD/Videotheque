@@ -4,13 +4,14 @@ import json
 
 app = Flask(__name__)
 
+
 @app.route("/api/createVideotheque", methods=['POST'])
 def create_videotheque():
     try:
-        filename=request.json['filename']
-        prenomP=request.json['prenomP']
-        nomP=request.json['nomP']
-        items ={'proprietaire': {"nom": nomP, "prenom": prenomP}, 'films': []}
+        filename = request.json['filename']
+        prenomP = request.json['prenomP']
+        nomP = request.json['nomP']
+        items = {'proprietaire': {"nom": nomP, "prenom": prenomP}, 'films': []}
         with open(f'{filename}', 'w') as f:
             json.dump(items, f, indent=4)
         # file = open(f'{filename}', 'w')
@@ -19,10 +20,11 @@ def create_videotheque():
     except Exception as e:
         return jsonify({'Error': 'Invalid request'})
 
+
 @app.route("/api/deleteVideotheque", methods=['DELETE'])
 def delete_videotheque():
     try:
-        filename=request.json['filename']
+        filename = request.json['filename']
         os.remove(filename)
         return "<p>File Deleted!</p>"
     except Exception as e:
@@ -32,7 +34,7 @@ def delete_videotheque():
 @app.route("/api/getAllMovies/<filename>", methods=['GET'])
 def get_data(filename):
     with open(f'{filename}', 'r') as f:
-        data=json.load(f)
+        data = json.load(f)
         print('-------------------------------------------')
         print(data)
         print('-------------------------------------------')
@@ -44,58 +46,56 @@ def get_data(filename):
 @app.route("/api/addFilms/<filename>", methods=['POST'])
 def add_data(filename):
     try:
-        titre=request.json['titre']
-        annee=request.json['annee']
-        nomR=request.json['nomR']
-        prenomR=request.json['prenomR']
-        acteurs=request.json['acteurs']
+        titre = request.json['titre']
+        annee = request.json['annee']
+        nomR = request.json['nomR']
+        prenomR = request.json['prenomR']
+        acteurs = request.json['acteurs']
         with open(f'{filename}', 'r') as f:
-            data=json.load(f)
+            data = json.load(f)
             print(data['films'])
-        
-        listFilms=data['films']
+
+        listFilms = data['films']
         films = {
-            "titre" : titre ,
-            "annee" : annee ,
-            "realisateur" : {"nom" : nomR, "prenom" : prenomR} ,
-            "acteurs" : acteurs
-        },
-        listFilms+=films
+                    "titre": titre,
+                    "annee": annee,
+                    "realisateur": {"nom": nomR, "prenom": prenomR},
+                    "acteurs": acteurs
+                },
+        listFilms += films
 
         with open(f'{filename}', 'w') as f:
             json.dump(data, f, indent=4)
-            
+
         return jsonify({'Sucess': 'Movie added'})
     except Exception as e:
         return jsonify({'Error': 'Invalid request'})
 
 
-
 @app.route("/api/foundMovie/<filename>", methods=['GET'])
 def found_movie(filename):
     try:
-        mouvie=request.json['mouvie']
+        movie = request.json['movie']
         with open(f'{filename}', 'r') as f:
-            data=json.load(f)
-            return [i for i in data['films'] if i['titre'] == mouvie][0]
+            data = json.load(f)
+            return [i for i in data['films'] if i['titre'] == movie][0]
     except Exception as e:
         return jsonify({'Error': 'Invalid request'})
 
-        
 
 @app.route("/api/deleteMovie/<filename>", methods=['DELETE'])
 def delete_movie(filename):
     try:
-        titre=request.json['titre']
-        if titre!="":
+        titre = request.json['titre']
+        if titre != "":
             with open(f'{filename}', 'r') as f:
-                data=json.load(f)
+                data = json.load(f)
             f.close()
-            listFilms=data['films']
+            listFilms = data['films']
 
             deletedict = [i for i in listFilms if not (i['titre'] == titre)]
 
-            data['films']=deletedict
+            data['films'] = deletedict
 
             print(deletedict)
 
@@ -108,4 +108,32 @@ def delete_movie(filename):
     except Exception as e:
         return jsonify({'Error': 'Invalid request'})
 
-        
+
+@app.route("/api/updateMovie/<filename>", methods=['PUT'])
+def update_movie(filename):
+    try:
+        title = request.json['title']
+        ntitre = request.json['ntitre']
+        nannee = request.json['nannee']
+        nnomR = request.json['nnomR']
+        nprenomR = request.json['nprenomR']
+        with open(f'{filename}', 'r') as f:
+            data = json.load(f)
+        f.close()
+
+        listFilms = data['films']
+
+        datafound = [i for i in data['films'] if i['titre'] == title][0]
+
+        datafound['titre'] = ntitre
+        datafound['annee'] = nannee
+        datafound['realisateur']['nom'] = nnomR
+        datafound['realisateur']['prenom'] = nprenomR
+
+        with open(f'{filename}', 'w') as f:
+            json.dump(data, f, indent=4)
+
+        return datafound
+
+    except Exception as e:
+        return jsonify({'Error': 'Invalid request'})
