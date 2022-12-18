@@ -5,11 +5,11 @@
     },
     "films": [
         {
-            "titre": "Wakanda_forever",
-            "annee": 1994,
+            "titre": "Kangourou",
+            "annee": 2000,
             "realisateur": {
-                "nom": "Tanrantino",
-                "prenom": "Quentin"
+                "nom": "Ba",
+                "prenom": "Aliou"
             },
             "acteurs": [
                 {
@@ -27,24 +27,24 @@
             ]
         },
         {
-            "titre": "Fast and furious",
-            "annee": 1994,
+            "titre": "DOUDOU",
+            "annee": 2005,
             "realisateur": {
-                "nom": "Tanrantino",
-                "prenom": "Quentin"
+                "nom": "Camara",
+                "prenom": "kaka"
             },
             "acteurs": [
                 {
-                    "nom": "Chadwick",
-                    "prenom": "Boseman"
+                    "nom": "Conord",
+                    "prenom": "Mc"
                 },
                 {
-                    "nom": "Thurman",
-                    "prenom": "Uma"
+                    "nom": "Lolo",
+                    "prenom": "Lili"
                 },
                 {
-                    "nom": "Jackson",
-                    "prenom": "Samuel L."
+                    "nom": "HIHI",
+                    "prenom": "SAHA"
                 }
             ]
         }
