@@ -1,22 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask_cors import CORS
 import os
 import json
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 @app.route("/api/createVideotheque", methods=['POST'])
 def create_videotheque():
     try:
-        filename = request.json['filename']
-        prenomP = request.json['prenomP']
-        nomP = request.json['nomP']
+        print(request)
+        filename = request.form['filename']
+        prenomP = request.form['prenomP']
+        nomP = request.form['nomP']
         items = {'proprietaire': {"nom": nomP, "prenom": prenomP}, 'films': []}
         with open(f'{filename}', 'w') as f:
             json.dump(items, f, indent=4)
         # file = open(f'{filename}', 'w')
         # file.writelines(items)
-        return jsonify({'Sucess': 'File Created and writed!'})
+
+        return redirect('http://127.0.0.1:5000/home')
+        #return jsonify({'Sucess': 'File Created and writed!'})
     except Exception as e:
         return jsonify({'Error': 'Invalid request'})
 

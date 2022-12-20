@@ -27,11 +27,11 @@
             ]
         },
         {
-            "titre": "Loal titre updated again",
+            "titre": "Loal titre normal",
             "annee": 2010,
             "realisateur": {
-                "nom": "Sall updated again",
-                "prenom": "Abdou updated again"
+                "nom": "Sall updated normal",
+                "prenom": "Abdou updated normal"
             },
             "acteurs": [
                 {
